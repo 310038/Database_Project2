@@ -1,19 +1,16 @@
-在出產年分大於2012的所有車中，使用PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)作為utilityf且生產廠商不為特斯拉的車種
+在出產年分等於2012的所有車中，使用PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)作為utilityf且生產廠商不為特斯拉的車種
 
 尚未最佳化:
-SELECT DISTINCT vehicle.model
+SELECT  DISTINCT vehicle.model
 FROM vehicle NATURAL JOIN detail
-WHERE vehicle.model_year>2012 AND
-      vehicle.make<>'TESLA' AND
-      detail.electric_utility='PUGET SOUND ENERGY INC||CITY OF TACOMA -        (WA)';
+WHERE vehicle.model_year = 2012 AND vehicle.make<>'TESLA' AND detail.electric_utility='PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)';
+
 
 最佳化後: (以model_year(生產年份)建立索引)
 
-CREATE INDEX model_year
-ON vehicle(model_year)
+CREATE INDEX model_year ON vehicle(model_year);
 
-SELECT DISTINCT vehicle.model
+SELECT  DISTINCT vehicle.model
 FROM vehicle NATURAL JOIN detail
-WHERE vehicle.model_year>2012 AND
-      vehicle.make<>'TESLA' AND
-      detail.electric_utility='PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)';
+WHERE vehicle.model_year = 2012 AND vehicle.make<>'TESLA' AND detail.electric_utility='PUGET SOUND ENERGY INC||CITY OF TACOMA - (WA)';
+
