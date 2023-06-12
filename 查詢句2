@@ -7,7 +7,6 @@ WHERE vehicle.model_year = 2012 AND vehicle.make<>'TESLA' AND detail.electric_ut
 
 
 最佳化後: (以model_year(生產年份)建立索引)
-
 CREATE INDEX model_year ON vehicle(model_year);
 
 SELECT  DISTINCT vehicle.model
